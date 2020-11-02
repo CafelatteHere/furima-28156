@@ -59,6 +59,8 @@ gem 'devise'
 gem 'pry-rails'
 gem 'rake', '~> 12.3', '>= 12.3.3'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
 
 group :production do
   gem 'rails_12factor'
