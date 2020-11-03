@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :condition_id, presence: true
   validates :shipment_type_id, presence: true
   validates :area_id, presence: true
-  validates :days_to_ship_it, presence: true
+  validates :days_to_ship_id, presence: true
   validates :price, presence: true
 
 end
