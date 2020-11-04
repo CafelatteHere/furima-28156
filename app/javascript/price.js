@@ -4,8 +4,8 @@ function price(){
   const profit = document.getElementById("profit");
 
   price_input.addEventListener('keyup', ()=>{
-    tax.innerHTML = (price_input.value * 0.1 );
-    profit.innerHTML = (price_input.value * 0.9 )
+    tax.innerHTML = Math.round(price_input.value * 0.1 );
+    profit.innerHTML = Math.round(price_input.value * 0.9 )
   });
 };
 
