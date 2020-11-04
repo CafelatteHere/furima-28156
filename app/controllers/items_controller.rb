@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_signin, except: [:index, :show]
   def new
     @item = Item.new
   end
@@ -16,12 +16,12 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :condition_id, :shipment_type_id, :area_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :shipment_type_id, :area_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
   end
 
-  def move_to_index
+  def move_to_signin
     unless user_signed_in?
-      redirect_to action: :index
+      redirect_to user_session_path
     end
   end
 end
