@@ -17,6 +17,5 @@ class Item < ApplicationRecord
   validates :area_id, numericality: { other_than: 1 }
   validates :days_to_ship_id, numericality: { other_than: 1 }
   validates :price, presence: true, numericality: { only_integer: true, message: 'must be only integers, half-width' }
-  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'must be between 300 & 9999999'}
-
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'must be between 300 & 9999999' }
 end

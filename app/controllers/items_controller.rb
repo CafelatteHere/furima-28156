@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_signin, except: [:index, :show]
+  before_action :move_to_signin, except: %i[index show]
   def new
     @item = Item.new
   end
@@ -20,8 +20,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_signin
-    unless user_signed_in?
-      redirect_to user_session_path
-    end
+    redirect_to user_session_path unless user_signed_in?
   end
 end
