@@ -8,14 +8,20 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :image, presence: true
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :category_id, numericality: { other_than: 1 }
-  validates :condition_id, numericality: { other_than: 1 }
-  validates :shipment_type_id, numericality: { other_than: 1 }
-  validates :area_id, numericality: { other_than: 1 }
-  validates :days_to_ship_id, numericality: { other_than: 1 }
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :description
+  end
+
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :condition_id
+    validates :shipment_type_id
+    validates :area_id
+    validates :days_to_ship_id
+  end
+
   validates :price, presence: true, numericality: { only_integer: true, message: 'must be only integers, half-width' }
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'must be between 300 & 9999999' }
 end
