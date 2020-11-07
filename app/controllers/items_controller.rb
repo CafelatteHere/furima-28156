@@ -13,6 +13,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def index
+    @items = Item.all.order( id: "DESC" )
+  end
   private
 
   def item_params
