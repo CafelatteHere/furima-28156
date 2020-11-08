@@ -4,9 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:email]
 
-  has_many :items
-  has_many :orders
-
   validates :nickname, presence: true
   validates :email, format: { with: /@/, message: 'は@を含む必要がある' }
   PASSWORD_REGEX = /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/.freeze
