@@ -14,13 +14,15 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.order( id: "DESC" )
+
+    @items = Item.includes(:order).all.order( id: "DESC" )
+    @order = @item.build_order if @user.order.exists?
   end
   private
 
 
   def item_params
-    params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :shipment_type_id, :area_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :shipment_type_id, :area_id, :days_to_ship_id, :price).merge(user_id: current_user.id).merge(order_id: @item.order.id)
   end
 
   def move_to_signin
