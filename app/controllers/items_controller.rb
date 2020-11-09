@@ -14,10 +14,14 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.order( id: "DESC" )
+    @items = Item.all.order(id: 'DESC')
   end
-  private
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  private
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :shipment_type_id, :area_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
