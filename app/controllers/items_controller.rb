@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :define_item, only: [ :show, :edit, :update ]
+  before_action :define_item, only: %i[show edit update]
   before_action :move_to_signin, except: %i[index show]
   def new
     @item = Item.new
@@ -18,8 +18,7 @@ class ItemsController < ApplicationController
     @items = Item.all.order(id: 'DESC')
   end
 
-  def show
-  end
+  def show; end
 
   def edit
     redirect_to item_path(@item.id) unless @item.user == current_user
