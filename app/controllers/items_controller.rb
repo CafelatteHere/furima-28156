@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :define_item, only: [ :show, :edit, :update ]
   before_action :move_to_signin, except: %i[index show]
   def new
     @item = Item.new
@@ -18,15 +19,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     @item.update(item_params)
     if @item.update(item_params)
       redirect_to item_path(@item.id)
@@ -43,5 +41,9 @@ class ItemsController < ApplicationController
 
   def move_to_signin
     redirect_to user_session_path unless user_signed_in?
+  end
+
+  def define_item
+    @item = Item.find(params[:id])
   end
 end
