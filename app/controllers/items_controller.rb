@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :define_item, only: %i[show edit update]
+  before_action :define_item, only: %i[show edit update destroy]
+  before_action :redirect, only: %i[edit destroy]
   before_action :move_to_signin, except: %i[index show]
+
   def new
     @item = Item.new
   end
@@ -20,9 +22,7 @@ class ItemsController < ApplicationController
 
   def show; end
 
-  def edit
-    redirect_to item_path(@item.id) unless @item.user == current_user
-  end
+  def edit; end
 
   def update
     if @item.update(item_params)
@@ -30,6 +30,11 @@ class ItemsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to root_path
   end
 
   private
@@ -44,5 +49,9 @@ class ItemsController < ApplicationController
 
   def define_item
     @item = Item.find(params[:id])
+  end
+
+  def redirect
+    redirect_to item_path(@item.id) unless @item.user == current_user
   end
 end
