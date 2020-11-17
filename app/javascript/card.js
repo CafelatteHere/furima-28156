@@ -1,5 +1,7 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
+  const soldOut = document.getElementById("sold-out");
+  soldOut.style.display = 'block';
   const form = document.getElementById("charge-form");
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -20,14 +22,14 @@ const pay = () => {
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
-      debugger
+
       document.getElementById("card-number").removeAttribute("name");
       document.getElementById("card-exp-month").removeAttribute("name");
       document.getElementById("card-exp-year").removeAttribute("name");
       document.getElementById("card-cvc").removeAttribute("name");
 
       document.getElementById("charge-form").submit();
-      debugger
+      // debugger
     });
   });
 };

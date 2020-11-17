@@ -267,6 +267,7 @@ a {
   text-align: center;
   background-color: crimson;
   transform: skewY(-10deg);
+  display:none;
 }
 
 .sold-out>span {
@@ -274,7 +275,6 @@ a {
   font-size: 45px;
   font: bold;
 }
-
 
 .item-info {
   background-color: #FFF;
@@ -306,6 +306,13 @@ a {
 
 .star-count {
   font-size: 2vh;
+}
+
+.not-available {
+  font-size: 4vh;
+  display: flex;
+  justify-content: space-between;
+  color: red;
 }
 
 /* //商品一覧 */
