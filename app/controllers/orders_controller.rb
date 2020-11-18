@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   end
 
   def redirect
-    if @item.user_id == current_user.id
+    if @item.user_id == current_user.id || @item.order
       redirect_to item_path(@item.id)
     end
   end
