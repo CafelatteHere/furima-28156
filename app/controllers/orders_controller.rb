@@ -1,13 +1,15 @@
 class OrdersController < ApplicationController
+  before_action :define_item, only: %i[index create redirect]
+  before_action :move_to_signin
+  before_action :redirect
 
   def index
-    @item = Item.find(params[:item_id])
+    # @item = Item.find(params[:item_id])
     @order_shipment = OrderShipment.new
   end
 
   def create
     @order_shipment = OrderShipment.new(order_params)
-    @item = Item.find(params[:item_id])
     if @order_shipment.valid?
       pay_item
       @order_shipment.save
@@ -31,6 +33,20 @@ class OrdersController < ApplicationController
         card: order_params[:token],
         currency: 'jpy'
       )
+  end
+
+  def define_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_signin
+    redirect_to user_session_path unless user_signed_in?
+  end
+
+  def redirect
+    if @item.user_id == current_user.id
+      redirect_to item_path(@item.id)
+    end
   end
 
 end
