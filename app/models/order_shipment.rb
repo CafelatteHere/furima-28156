@@ -1,7 +1,6 @@
 class OrderShipment
   include ActiveModel::Model
   attr_accessor :prefecture_id, :zip_code, :city, :house_number, :building_name, :tel, :user_id, :item_id, :token
-  # attr_reader :item, :user
 
   with_options presence: true do
     validates  :zip_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "must include 7 digits and contain hyphen after 3rd digit" }

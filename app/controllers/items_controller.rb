@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.order(id: 'DESC')
+    @items =Item.includes(:order, :user).order(id: 'DESC')
   end
 
   def show; end

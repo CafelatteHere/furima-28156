@@ -1,7 +1,5 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
-  const soldOut = document.getElementById("sold-out");
-  soldOut.style.display = 'block';
   const form = document.getElementById("charge-form");
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -29,9 +27,9 @@ const pay = () => {
       document.getElementById("card-cvc").removeAttribute("name");
 
       document.getElementById("charge-form").submit();
-      // debugger
     });
   });
+
 };
 
 window.addEventListener("load", pay);
