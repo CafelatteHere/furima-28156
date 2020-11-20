@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_11_12_145402) do
     t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["item_id"], name: "index_orders_on_item_id", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
