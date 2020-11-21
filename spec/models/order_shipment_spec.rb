@@ -45,6 +45,12 @@ RSpec.describe OrderShipment, type: :model do
       expect(@order_shipment.errors.full_messages).to include("House number can't be blank")
     end
 
+    it "建物名が空でも購入できる" do
+      @order_shipment.building_name = nil
+      @order_shipment.valid?
+      expect(@order_shipment).to be_valid
+    end
+
     it "電話番号が空と購入できない" do
       @order_shipment.tel = nil
       @order_shipment.valid?
