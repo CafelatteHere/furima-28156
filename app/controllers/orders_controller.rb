@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :define_item, only: [:index, :create, :redirect]
+  before_action :define_item, only: %i[index create redirect]
   before_action :authenticate_user!
 
   def index
@@ -25,12 +25,12 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: order_params[:token],
-        currency: 'jpy'
-      )
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
   end
 
   def define_item
@@ -38,9 +38,6 @@ class OrdersController < ApplicationController
   end
 
   def redirect
-    if @item.user_id == current_user.id || @item.order
-      redirect_to item_path(@item.id)
-    end
+    redirect_to item_path(@item.id) if @item.user_id == current_user.id || @item.order
   end
-
 end
