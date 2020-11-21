@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :define_item, only: [:index, :create, :redirect]
-  before_action :move_to_signin
-  before_action :redirect
+  before_action :authenticate_user!
 
   def index
     @order_shipment = OrderShipment.new
@@ -36,10 +35,6 @@ class OrdersController < ApplicationController
 
   def define_item
     @item = Item.find(params[:item_id])
-  end
-
-  def move_to_signin
-    redirect_to user_session_path unless user_signed_in?
   end
 
   def redirect

@@ -7,11 +7,10 @@ class OrderShipment
     validates  :city
     validates  :house_number
     validates  :tel, length:{maximum: 11}, format: { with: /\A\d+\z/, message: "can include only digits"}
+    validates :prefecture_id, numericality: { other_than: 1 }
+    validates :building_name, allow_blank: true, length: { minimum: 2 }
+    validates :token,
   end
-
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :building_name, allow_blank: true, length: { minimum: 2 }
-  validates :token, presence: true
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id, token: token)
