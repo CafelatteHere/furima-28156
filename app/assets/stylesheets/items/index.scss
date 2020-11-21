@@ -275,7 +275,6 @@ a {
   font: bold;
 }
 
-
 .item-info {
   background-color: #FFF;
   color: black;
@@ -306,6 +305,13 @@ a {
 
 .star-count {
   font-size: 2vh;
+}
+
+.not-available {
+  font-size: 4vh;
+  display: flex;
+  justify-content: space-between;
+  color: red;
 }
 
 /* //商品一覧 */

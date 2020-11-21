@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:email]
+  has_many :items
+  has_many :orders
 
   validates :nickname, presence: true
   validates :email, format: { with: /@/, message: 'は@を含む必要がある' }

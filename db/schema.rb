@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_102_154_509) do
+ActiveRecord::Schema.define(version: 20_201_112_145_402) do
   create_table 'active_storage_attachments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -35,16 +35,38 @@ ActiveRecord::Schema.define(version: 20_201_102_154_509) do
   create_table 'items', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', default: '', null: false
     t.text 'description', null: false
-    t.integer 'category_id', default: 0, null: false
-    t.integer 'condition_id', default: 0, null: false
-    t.integer 'shipment_type_id', default: 0, null: false
-    t.integer 'area_id', default: 0, null: false
-    t.integer 'days_to_ship_id', default: 0, null: false
+    t.integer 'category_id', null: false
+    t.integer 'condition_id', null: false
+    t.integer 'shipment_type_id', null: false
+    t.integer 'area_id', null: false
+    t.integer 'days_to_ship_id', null: false
     t.integer 'price', default: 0, null: false
     t.bigint 'user_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['user_id'], name: 'index_items_on_user_id'
+  end
+
+  create_table 'orders', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'item_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['item_id'], name: 'index_orders_on_item_id', unique: true
+    t.index ['user_id'], name: 'index_orders_on_user_id'
+  end
+
+  create_table 'shipments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.bigint 'order_id', null: false
+    t.string 'zip_code', null: false
+    t.integer 'prefecture_id', null: false
+    t.string 'city', null: false
+    t.string 'house_number', null: false
+    t.string 'building_name'
+    t.string 'tel', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['order_id'], name: 'index_shipments_on_order_id'
   end
 
   create_table 'users', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -67,4 +89,7 @@ ActiveRecord::Schema.define(version: 20_201_102_154_509) do
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'items', 'users'
+  add_foreign_key 'orders', 'items'
+  add_foreign_key 'orders', 'users'
+  add_foreign_key 'shipments', 'orders'
 end
