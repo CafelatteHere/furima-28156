@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :define_item, only: %i[index create redirect]
+  before_action :define_item, only: [:index, :create, :redirect]
   before_action :move_to_signin
   before_action :redirect
 
   def index
-    # @item = Item.find(params[:item_id])
     @order_shipment = OrderShipment.new
   end
 
