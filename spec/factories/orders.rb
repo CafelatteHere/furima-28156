@@ -4,6 +4,6 @@ FactoryBot.define do
     association :user
     association :item
     item_id {:item.id}
-     user_id {:user.id}
+    user_id {:user.id}
   end
 end

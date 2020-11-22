@@ -9,7 +9,7 @@ class OrderShipment
     validates  :tel, length:{maximum: 11}, format: { with: /\A\d+\z/, message: "can include only digits"}
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :building_name, allow_blank: true, length: { minimum: 2 }
-    validates :token,
+    validates :token
   end
 
   def save
